@@ -1,0 +1,10 @@
+https://overthewire.org/wargames/bandit/bandit1.html
+
+Level0
+Username: ssh bandit0@bandit.labs.overthewire.org -p 2220
+Password: bandit0
+
+Level1
+cat readme
+Username: ssh bandit1@bandit.labs.overthewire.org -p 2220
+Obtained password: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
