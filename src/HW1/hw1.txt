@@ -2,9 +2,83 @@ https://overthewire.org/wargames/bandit/bandit1.html
 
 Level0
 Username: ssh bandit0@bandit.labs.overthewire.org -p 2220
-Password: bandit0
+a. bandit0
+b.   .   /   ;.  \   ;    ;     /    /__./ \ : |
+c. 37:bandit0:x:11000:11000:bandit level 0:/home/bandit0:/bin/bash (command: grep -n bandit0 /etc/passwd)
+d. The password was given to me on the website
 
 Level1
-cat readme
 Username: ssh bandit1@bandit.labs.overthewire.org -p 2220
-Obtained password: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+a. ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If
+b.   .   ;   /  ` ; .'___,/    ,' .--'.  '   \' .
+c.  38:bandit1:x:11001:11001:bandit level 1:/home/bandit1:/bin/bash
+d. cat readme
+
+Level2
+Username: ssh bandit2@bandit.labs.overthewire.org -p 2220
+a.263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+b.  ;   |  ; \ ; | |    :     | /___/ \ |    ' '
+c.49:bandit2:x:11002:11002:bandit level 2:/home/bandit2:/bin/bash
+d.cat ./-
+
+Level3
+Username: ssh bandit3@bandit.labs.overthewire.org -p 2220
+a.MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+b.  |   :  | ; | ' ;    |.';  ; ;   \  \;      :
+c.60:bandit3:x:11003:11003:bandit level 3:/home/bandit3:/bin/bash
+d.cat "spaces in this filename"
+
+Level 4
+Username: ssh bandit4@bandit.labs.overthewire.org -p 2220
+a.2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+b.  .   |  ' ' ' : `----'  |  |  \   ;  `      |
+c.65:bandit4:x:11004:11004:bandit level 4:/home/bandit4:/bin/bash  (grep -n bandit4 /etc/passwd)
+d.cat "...Hiding-From-You"
+
+Level 5
+Username: ssh bandit5@bandit.labs.overthewire.org -p 2220
+a.4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+b.  '   ;  \; /  |     '   :  ;   .   \    .\  ;
+c.66:bandit5:x:11005:11005:bandit level 5:/home/bandit5:/bin/bash
+d.cat ./-file07
+
+Level 6
+Username: ssh bandit6@bandit.labs.overthewire.org -p 2220
+a.HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+b.   \   \  ',  /      |   |  '    \   \   ' \ |
+c.67:bandit6:x:11006:11006:bandit level 6:/home/bandit6:/bin/bash (grep -n bandit6 /etc/passwd)
+d.find -type f -size 1033c -not -executable  
+  cat ./.file2
+
+Level 7
+Username: ssh bandit7@bandit.labs.overthewire.org -p 2220
+a.morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+b.    ;   :    /       '   :  |     :   '  |--"
+c.68:bandit7:x:11007:11007:bandit level 7:/home/bandit7:/bin/bash (grep -n bandit7 /etc/passwd)
+d.find / -type f -user bandit7 -group bandit6 -size 33c 2> /dev/null
+  cat /var/lib/dpkg/info/bandit7.password
+
+Level 8
+Username: ssh bandit8@bandit.labs.overthewire.org -p 2220
+a.dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+b.     \   \ .'        ;   |.'       \   \ ;
+c.69:bandit8:x:11008:11008:bandit level 8:/home/bandit8:/bin/bash(grep -n bandit8 /etc/passwd)
+d.grep millionth data.txt
+
+Level 9
+Username: ssh bandit9@bandit.labs.overthewire.org -p 2220
+a.4CKMh1JI91bUIZZPXDqGanal4xvAg0JM
+b.  www. `---` ver     '---' he       '---" ire.org
+c.70:bandit9:x:11009:11009:bandit level 9:/home/bandit9:/bin/bash(grep -n bandit9 /etc/passwd)
+d.cat data.txt | sort | uniq -u
+
+Level 10
+Username: ssh bandit10@bandit.labs.overthewire.org -p 2220
+a.FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey
+b.
+c.39:bandit10:x:11010:11010:bandit level 10:/home/bandit10:/bin/bash (grep -n bandit10 /etc/passwd)
+d.cat data.txt | strings -e s | grep ==
+========== the*2i"4
+========== password
+Z)========== is
+&==========
