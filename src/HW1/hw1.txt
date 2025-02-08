@@ -82,3 +82,170 @@ d.cat data.txt | strings -e s | grep ==
 ========== password
 Z)========== is
 &==========
+
+Level 11
+Username: ssh bandit11@bandit.labs.overthewire.org -p 2220
+a.dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr
+b. 
+c.40:bandit11:x:11011:11011:bandit level 11:/home/bandit11:/bin/bash 
+d.cat data.txt | base64 -d
+
+Level 12
+Username: ssh bandit12@bandit.labs.overthewire.org -p 2220
+a.7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4
+b.Welcome to OverTheWire!
+c.41:bandit12:x:11012:11012:bandit level 12:/home/bandit12:/bin/bash
+d.cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+
+Level 13
+Username: Username: ssh bandit13@bandit.labs.overthewire.org -p 2220
+a. FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
+b.    
+c.42:bandit13:x:11013:11013:bandit level 13:/home/bandit13:/bin/bash (grep -n bandit13 /etc/passwd)
+d.bandit12@bandit:~$ ls
+data.txt
+bandit12@bandit:~$ mkdir /temp/joe
+mkdir: cannot create directory ‘/temp/joe’: No such file or directory
+bandit12@bandit:~$ mkdir /tmp/joe
+bandit12@bandit:~$ cp data.txt /tmp/joe
+bandit12@bandit:~$ cd /tmp/joe
+bandit12@bandit:/tmp/joe$ ls
+data.txt
+bandit12@bandit:/tmp/joe$ xxd -r data.txt > data
+bandit12@bandit:/tmp/joe$ ls
+data  data.txt
+bandit12@bandit:/tmp/joe$ mv data file.gz
+bandit12@bandit:/tmp/joe$ gzip -d file.gz
+bandit12@bandit:/tmp/joe$ ls
+data.txt  file
+bandit12@bandit:/tmp/joe$ file file
+file: bzip2 compressed data, block size = 900k
+bandit12@bandit:/tmp/joe$ mv file file.bz2
+bandit12@bandit:/tmp/joe$ ls
+data.txt  file.bz2
+bandit12@bandit:/tmp/joe$ bzip2 -d file .bz2
+bzip2: Can't open input file file: No such file or directory.
+bzip2: Can't open input file .bz2: No such file or directory.
+bandit12@bandit:/tmp/joe$ bzip2 -d file.bz2
+bandit12@bandit:/tmp/joe$ file file
+file: gzip compressed data, was "data4.bin", last modified: Thu Sep 19 07:08:15 2024, max compression, from Unix, original size modulo 2^32 20480
+bandit12@bandit:/tmp/joe$ mv file file.gz 
+bandit12@bandit:/tmp/joe$ gzip -d file.gz
+bandit12@bandit:/tmp/joe$ file file
+file: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/joe$ mv file file.tar
+bandit12@bandit:/tmp/joe$ tar xf file.tar
+bandit12@bandit:/tmp/joe$ ls
+data5.bin  data.txt  file.tar
+bandit12@bandit:/tmp/joe$ rm file.tar
+bandit12@bandit:/tmp/joe$ rm data.txt
+bandit12@bandit:/tmp/joe$ ls
+data5.bin
+bandit12@bandit:/tmp/joe$ mv data5.bin data.tar
+bandit12@bandit:/tmp/joe$ tar xf data.tar
+bandit12@bandit:/tmp/joe$ mv data6.bin databz2
+bandit12@bandit:/tmp/joe$ bzip2 -d data.bz2
+bzip2: Can't open input file data.bz2: No such file or directory.
+bandit12@bandit:/tmp/joe$ mv data6.bin data.bz2
+mv: cannot stat 'data6.bin': No such file or directory
+bandit12@bandit:/tmp/joe$ ls
+databz2  data.tar
+bandit12@bandit:/tmp/joe$ mv databz2 data.bz2
+bandit12@bandit:/tmp/joe$ ls
+data.bz2  data.tar
+bandit12@bandit:/tmp/joe$ bzip2 -d data.bz2
+bandit12@bandit:/tmp/joe$ ls
+data  data.tar
+bandit12@bandit:/tmp/joe$ tar xf data.tar
+bandit12@bandit:/tmp/joe$ ls
+data  data6.bin  data.tar
+bandit12@bandit:/tmp/joe$ file data6.bin
+data6.bin: bzip2 compressed data, block size = 900k
+bandit12@bandit:/tmp/joe$ rm data.tar
+bandit12@bandit:/tmp/joe$ mv data data.tar
+bandit12@bandit:/tmp/joe$ ls
+data6.bin  data.tar
+bandit12@bandit:/tmp/joe$ rm data6.bin
+bandit12@bandit:/tmp/joe$ ls
+data.tar
+bandit12@bandit:/tmp/joe$ tar xf data.tar
+bandit12@bandit:/tmp/joe$ ls
+data8.bin  data.tar
+bandit12@bandit:/tmp/joe$ rm data.tar
+bandit12@bandit:/tmp/joe$ file data8.bin
+data8.bin: gzip compressed data, was "data9.bin", last modified: Thu Sep 19 07:08:15 2024, max compression, from Unix, original size modulo 2^32 49
+bandit12@bandit:/tmp/joe$ mv data8.bin data.gz
+bandit12@bandit:/tmp/joe$ ls
+data.gz
+bandit12@bandit:/tmp/joe$ gzip -d data.gz 
+bandit12@bandit:/tmp/joe$ ls
+data
+bandit12@bandit:/tmp/joe$ file data
+data: ASCII text
+bandit12@bandit:/tmp/joe$ cat data
+The password is FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn
+bandit12@bandit:/tmp/joe$ 
+
+Level 14
+Username: Username: ssh bandit14@bandit.labs.overthewire.org -p 2220
+a. MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+b. If you find any problems, please report them to the #wargames channel on
+c.443:bandit14:x:11014:11014:bandit level 14:/home/bandit14:/bin/bash(grep -n bandit14 /etc/passwd)
+d.ssh -i sshkey.private -p 2220 bandit14@localhost
+cat /etc/bandit_pass/bandit14
+
+
+Level 15
+Username: ssh bandit15@bandit.labs.overthewire.org -p 2220
+a.8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+b.discord or IRC.
+c.44:bandit15:x:11015:11015:bandit level 15:/home/bandit15:/bin/bash(grep -n bandit15 /etc/passwd)
+d.cat /etc/bandit_pass/bandit14
+netcat localhost 30000
+MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS
+
+Level 16
+Username: ssh bandit16@bandit.labs.overthewire.org -p 2220
+a.kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx
+b.
+c.45:bandit16:x:11016:11016:bandit level 16:/home/bandit16:/bin/bash(grep -n bandit16 /etc/passwd)
+d.openssl s_client -connect localhost:30001
+8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo
+
+Level 17
+Username: ssh bandit17@bandit.labs.overthewire.org -p 2220
+a.-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
++TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+-----END RSA PRIVATE KEY-----
+b. 46:bandit17:x:11017:11017:bandit level 17:/home/bandit17:/bin/bash grep -n bandit17 /etc/passwd
+c.
+d. nmap 127.0.0.1 -p 31000-32000
+nmap -p 31000,31046,31518,31691,31960 -A localhost
+openssl s_client -ign_eof -connect localhost:31790
+mkdir /tmp/hehe
+cd /tmp/hehe
+nano sshkey.private
