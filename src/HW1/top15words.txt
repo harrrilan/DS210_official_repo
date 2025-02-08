@@ -1,0 +1,23 @@
+curl -s https://raw.githubusercontent.com/cs109/2015/refs/heads/master/Lectures/Lecture15b/sparklect/shakes/kinglear.txt \
+| tr '[:upper:]' '[:lower:]' \
+| grep -v '^$' \
+| tr -cs '[:alnum:]' '\n' \
+| sort \
+| uniq -c \
+| sort -nr \
+| head -n 15
+ 853 the
+ 745 and
+ 730 i
+ 575 to
+ 494 of
+ 459 you
+ 458 my
+ 407 a
+ 364 that
+ 343 d
+ 304 in
+ 286 not
+ 271 s
+ 242 this
+ 233 lear
