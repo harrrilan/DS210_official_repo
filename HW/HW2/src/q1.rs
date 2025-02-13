@@ -13,20 +13,18 @@ fn fib(k:u32) -> u128{
         break;
     }
 
-    let k_2 = 0;
-    let k_1 = 1;
-    let k = 1;
+    let mut k_2 = 0;
+    let mut k_1 = 1;
+    let mut result = 1;
 
-    for i in 0..=k {
+    for i in 2..=k {
+        let result = k_2 + k_1;
 
-        let k = k_2 + k_1;
-
-        let k_1 = k;
-        let k_2 = k_1;
-        k += 1;
-
+        k_2 = k_1;
+        k_1 = result;
+        
     }
-    return k;
+    k_1
 }
 
 fn main() {
