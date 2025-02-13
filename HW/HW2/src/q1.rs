@@ -8,9 +8,9 @@ fn fib(k:u32) -> u128{
     else if k == 1 {
         return 1;
     }
-    else if k < 49 {
+    else if k > 49 {
         println!("k is less than 180");
-        break;
+        return 0;
     }
 
     let mut k_2 = 0;
@@ -31,7 +31,7 @@ fn main() {
     let before = SystemTime::now(); 
     
     let result = fib(10);
-    println!("fibonacci result: {}", result)
+    println!("fibonacci result: {}", result);
 
 
     let after = SystemTime::now(); 
