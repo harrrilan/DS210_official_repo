@@ -30,7 +30,7 @@ fn fib(k:u32) -> u128{
 fn main() {
     let before = SystemTime::now(); 
     
-    let result = fib(10);
+    let result = fib(45);
     println!("fibonacci result: {}", result);
 
 
