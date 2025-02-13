@@ -3,9 +3,9 @@ use std::time::SystemTime;
 
 fn sum_of_cube(k:u8) -> u32{
 
-    for i in 1..=k {
+    let sum = 0;
 
-        let sum = 0;
+    for i in 1..=k {
 
         let cube = i ** 3;
         let sum = cube + sum;
