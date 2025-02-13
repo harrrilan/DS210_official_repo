@@ -1,6 +1,20 @@
-# OS Files
-.DS_Store
+# Rust build artifacts
+/target/
+/debug/
 
+# Cargo lock file (remove this line if this is a binary/application)
+Cargo.lock
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
 .ipynb_checkpoints/
 
+# OS generated files
+.DS_Store
 *.bkp
+
+# Debug files
+**/*.rs.bk

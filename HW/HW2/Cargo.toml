@@ -1,6 +1,16 @@
 [package]
-name = "HW_2"
+name = "hw2"
 version = "0.1.0"
 edition = "2021"
 
-[dependencies]
+[[bin]]
+name = "q1"
+path = "src/q1.rs"
+
+[[bin]]
+name = "q2"
+path = "src/q2.rs"
+
+[[bin]]
+name = "q3"
+path = "src/q3.rs"

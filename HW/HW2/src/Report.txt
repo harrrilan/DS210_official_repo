@@ -1,0 +1,34 @@
+======== Report for Q1 ========
+
+cargo run: fin(5)              
+fibonacci result: 5
+Time it took: 28µs
+
+cargo run release: fin(5)
+fibonacci result: 5
+Time it took: 36µs
+
+
+cargo run: fin(20)
+fibonacci result: 6765
+Time it took: 25µs
+
+cargo run release: fin(20)
+fibonacci result: 6765
+Time it took: 23µs
+
+cargo run: fin(45)
+fibonacci result: 1134903170
+Time it took: 32µs
+
+cargo run release: fin(45)
+fibonacci result: 1134903170
+Time it took: 25µs
+
+
+======== Report for Q2 ========
+
+
+======== Report for Q3 ========
+
+

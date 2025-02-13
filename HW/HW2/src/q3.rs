@@ -3,14 +3,14 @@ use std::time::SystemTime;
 
 fn sum_of_cube(k:u8) -> u32{
 
-    let sum = 0;
+    let mut sum:u32 = 0;
 
     for i in 1..=k {
-
-        let cube = i ** 3;
-        let sum = cube + sum;
+        let cube = (i as u32) * (i as u32) * (i as u32);
+        sum = cube + sum;
     }
-    return sum;
+
+    sum
 }
 
 
@@ -20,7 +20,7 @@ fn main() {
 
     // replace this function
     let result = sum_of_cube(10);
-    println!("fibonacci result: {}", result)
+    println!("sum_of_cube result: {}", result);
 
 
     let after = SystemTime::now(); 
