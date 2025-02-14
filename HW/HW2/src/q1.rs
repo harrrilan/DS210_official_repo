@@ -29,8 +29,9 @@ fn fib(k:u32) -> u128{
 
 fn main() {
     let before = SystemTime::now(); 
-    
-    let result = fib(45);
+    let k = 5;
+    println!("Inserted k: {}", k);
+    let result = fib(k);
     println!("fibonacci result: {}", result);
 
 
