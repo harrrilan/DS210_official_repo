@@ -19,7 +19,7 @@ fn main() {
     
 
     // replace this function
-    let result = sum_of_cube(10);
+    let result = sum_of_cube(4);
     println!("sum_of_cube result: {}", result);
 
 

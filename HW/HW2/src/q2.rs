@@ -1,6 +1,6 @@
 use std::time::SystemTime; 
 
-fn fib(k:u128) -> u128{
+fn fib(k:u8) -> u128{
     
     if k == 0 {
         return 0;
@@ -26,8 +26,9 @@ fn fib(k:u128) -> u128{
 
 fn main() {
     let before = SystemTime::now(); 
-    
-    let result = fib(10);
+    let k = 180;
+    println!("Inserted k: {}", k);
+    let result = fib(k);
     println!("fibonacci result: {}", result);
 
 
