@@ -1,3 +1,2 @@
-fn main() {
-    println!("Hello, world!");
-}
+struct Polygon{param:f64}
+
