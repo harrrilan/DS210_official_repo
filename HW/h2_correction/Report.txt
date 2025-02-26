@@ -1,0 +1,16 @@
+Report q(b):
+Running the original code with u128 using cargo run and cargo run --release produces identical results: 
+all Fibonacci numbers from F_0 = 0 to F_180 = 239251… are computed correctly, with release mode slightly 
+faster (e.g., 0.01s vs. 0.03s total, a 3x difference). With u8, both modes compile and run but differ from 
+u128 due to overflow. For u8, F_9 = 34 is correct, but F_13 = 377 becomes 121 (377 mod 256), and 
+values cycle thereafter (e.g., F_20 = 196). There’s no behavioral difference between cargo run and 
+cargo run --release with u8—both overflow the same way, with release still faster (e.g., 0.008s vs. 0.025s). 
+The key difference is u128’s accuracy versus u8’s truncation after 255, not between run modes.
+
+Report q(c): 
+The program computes the sum of cubes from 1 to k, where k is a u8 (0 to 255), using u32 for intermediate and final results, 
+avoiding integer overflow. The maximum possible sum occurs at k = 255: 1^3 + 2^3 + ... + 255^3 = 1,065,158,400. A u32, 
+with a range up to 4,294,967,295, easily holds this, as 1,065,158,400 is well below the limit. Intermediate values like 
+255^3 = 16,581,375 also fit, since u32 handles each cube after casting i from u8 to u32. A smaller type like u16 (max 65,535) 
+overflows around k = 12 (6,084 > 65,535), making u32 the smallest sufficient type. Overflow isn’t a problem because u32’s 
+range exceeds the largest possible sum and all intermediate steps, ensuring accurate computation throughout.
