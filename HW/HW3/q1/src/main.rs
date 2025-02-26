@@ -69,6 +69,26 @@ fn create_shape(shape_type: &str, l_or_r: f64, w: f64, h: f64) -> Shape {
 
 fn main() {
     let pyramid = create_shape("pyramid", 2.0, 3.0, 4.0);
-    println!("Pyramid volume: {}", pyramid.volume());
-    println!("Pyramid valid: {}", pyramid.is_valid());
+    println!("Pyramid:");
+    println!("  Volume: {}", pyramid.volume());
+    println!("  Surface Area: {}", pyramid.surface_area());
+    println!("  Is Valid: {}", pyramid.is_valid());
+    let doubled_pyramid = pyramid.double_height_or_radius();
+    println!("  Volume after doubling height: {}", doubled_pyramid.volume());
+    
+    let cuboid = create_shape("cuboid", 2.0, 3.0, 4.0);
+    println!("\nCuboid:");
+    println!("  Volume: {}", cuboid.volume());
+    println!("  Surface Area: {}", cuboid.surface_area());
+    println!("  Is Valid: {}", cuboid.is_valid());
+    let doubled_cuboid = cuboid.double_height_or_radius();
+    println!("  Volume after doubling height: {}", doubled_cuboid.volume());
+    
+    let sphere = create_shape("sphere", 2.0, 0.0, 0.0); // w and h ignored for sphere
+    println!("\nSphere:");
+    println!("  Volume: {}", sphere.volume());
+    println!("  Surface Area: {}", sphere.surface_area());
+    println!("  Is Valid: {}", sphere.is_valid());
+    let doubled_sphere = sphere.double_height_or_radius();
+    println!("  Volume after doubling radius: {}", doubled_sphere.volume());
 }
