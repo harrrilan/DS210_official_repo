@@ -1,0 +1,11 @@
+Observation: Ratio of Polygon to Circumcircle Area
+For radii 1.0, 5.0, and 10.0, the ratio of polygon area to circumscribed circle area (poly area / πr^2) 
+increases as sides grow from 4 to 65,536, approaching 1. For r = 1.0 (circumcircle = 3.1416), the ratio 
+starts at 0.6366 (2.0000 / 3.1416) with 4 sides, rises to 0.9003 (8 sides), 0.9981 (512 sides), and hits 
+1.0000 (65,536 sides). For r = 5.0 (circumcircle = 78.5398), it’s 0.6366 (50.0000 / 78.5398) to 1.0000 
+(78.5398 / 78.5398); for r = 10.0 (circumcircle = 314.1593), it mirrors this: 0.6366 to 1.0000. 
+This shows the polygon’s area grows proportionally closer to the circumcircle’s as n increases, 
+reflecting its circular approximation. The ratio’s rise is steep initially (4 to 16 sides) then slows, 
+stabilizing near 1, consistent across radii. This aligns with sin(π/n) shrinking, making side length and area 
+calculations nearly circular. The circumcircle area always exceeds the polygon’s, but the gap closes, 
+with the ratio proving radius-independent—purely a function of n—reaching ~99.98% by 2048 sides.

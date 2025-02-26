@@ -37,17 +37,17 @@ fn main() {
     for &radius in radii.iter() {
         println!("\nRadius: {}", radius);
         for &sides in side_counts.iter() {
-            
             let side_length = 2.0 * radius * (PI / sides as f64).sin();
             let poly = RegularPolygon { sides, side_length };
 
             let poly_area = poly.area();
             let circum_area = PI * radius * radius;
             let in_area = PI * poly.apothem() * poly.apothem();
+            let ratio_poly_to_circum = poly_area / circum_area; // Add this
 
             println!(
-                "Sides: {:5} | Poly Area: {:.4} | Circum Circle: {:.4} | In Circle: {:.4}",
-                sides, poly_area, circum_area, in_area
+                "Sides: {:5} | Poly Area: {:.4} | Circum Circle: {:.4} | In Circle: {:.4} | Ratio (Poly/Circum): {:.4}",
+                sides, poly_area, circum_area, in_area, ratio_poly_to_circum
             );
         }
     }
