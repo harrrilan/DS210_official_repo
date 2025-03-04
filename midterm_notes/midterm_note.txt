@@ -1,0 +1,147 @@
+=======statis vs Dynamic========
+let n = i32 = 5. Having i32 is specify. n= 5 machine can infer. but its static type. 
+compiler is checking types. Where as runntime for interpretet dynamic types.
+
+===garbage & memory mgmt======
+garbage: runtime. trying to figure out when memory is no longer needed and collect the garbage, the one thats no used. e.g: Java
+explicit memory mgmt: in language, state i wanna allocatre the memory and what to deallocated. e.g. C, C++ programmers manage the memory, 
+Rust: ownership rule compliter can figure out when to allocate the memory and deallocate. 
+
+====rust is============
+compoiled
+static Typedmanual memory mgmtimperative/aspect of functional/object-oriented. 
+structure of an executable (stack, heap, text,data, bss)
+stack:we have local variables.
+heap: dynamically allocated memeory and larger memory allocated)
+simply types like int floats enum struck, allocated to stack. tend to get copied assigned to another. heap is bigger allocation
+when we say let x = y y goes to heap vector. 
+
+=======memory=========
+text is low memory address stack is high.
+text: compiled code
+initialized data: n = 5
+uninitialized data(bss): let x = f32
+stack: start from top. as it grows it comes down. tend to be faster to access.
+heap: needs more, it grow from the bottom. access any location? we have to check if there is space, 
+and might have to check and move smthng around
+order of accessing memory/stack: LIFO
+
+=======system concept======
+- numbering system
+decimal:
+binary:
+hexadecimal: 0-9 319 decimal
+octal: 
+converting base to decimal take log to the right base. 
+octal and binary: 0o34 = 0b011_100
+
+van neuman architecture: three componentn system: memory cpu, processor, I/O
+
+memory hiarachy: registers 1st access , casche multiple layer, memory next slower, disk slower. internet, fetching so slow. 
+virtual memory: address range, hige never fill it up. virtual translation operation. whole address range. page table mapping it to pysical memory. 
+which page 32 megabyes. mapped into memory. 
+High level trends, size, and costs: price for each operation? or hardware
+indexed: shell, shell commands, and shell scripts 
+- important commands: ls, cd, cp, mv, cat(printout the content), 
+touch(name file, makes that file exist but nothing exist), mkdir, rm, chmod(line permission?????), echo
+
+==========git source code ==========
+- working tree: git init, git status, git add 
+- staging area: not committed yet. want to unstage. git commit 
+- git directory:
+
+other branches can merge to the main
+
+- git server:
+    - git push to remote repository 
+    - git pusll 
+
+===memeory mgmt fail-=====
+- how can explicit memory management fail?
+- leakage. c, c++ not strickly checking. dealocating? memory slowly grows. when deploy it start crasking week later. in C, C++
+- use after free(also problem in c and c++) dealocating the memory. lose what was in the memory
+- double free: bas in some languages how many parts of the program are referencing the memory. if freed, and free again can be corrupt. 
+- rust take cares of most of the part.
+
+====hash function=====
+- psudo random function that creates big number such that even the input can be slightly different and numbers will be different. 
+tends to fill 32 bits 64bits int space, slight change can fill that space uniformely
+-==complexity of algorithm---
+- nested loops.
+- triple nested loops. order can be cubed. 
+- dont distinguish beteen cube and n cube????
+
+
+======++RUST==============
+- basic types: signed, unsinged. diff between u size and i size? 
+signed: positive
+unsigned : negative
+
+u and unisinzed: machine default. use the machine language default. u32, i32. 
+in rust you can't interoperate. we have to do casting. like as i32, i16. compiler will compliant. 
+
+
+cargo commands:
+- cargo new: create new file
+- cargo check: check syntax. not compiling.
+-cargo build: compiling
+- cargo test: to run test functions
+- cargo clean: delete the target folders. 
+cargobuild or release  -- release: optimized faster. 
+cargo run: debug version
+
+=====control flows=========
+name breaks and continue: in nested loops. continute: stop the loop and increment and do whats doing on the top 
+
+compounddata types
+- arrays: stack 
+- Tuples: stack 
+- structs: stack  if vector then heap if it had pointer. 
+- tuple structs: 
+- enums: 
+- more control flows
+    - match statement: matching with enum, exhaustive. there is also _ where could choose other options.
+    - use if let: doesnt force us to be exhaustive
+
+if we konw the size ahead of time stack??? if create huge array, might go to Heap????
+
+==== memory semantics
+- mutable: only one. multi threaded parallel programming. 
+- immutable: how many? as many. no limit. im just reading im not changing. variable doesnt go away. 
+
+
+== methods====
+- functions defined within the context within struct.
+- oop nature. closer you get to oop 
+- exp. create struct without method, create new constructor fucntion that creates struck that passing some descriptoin of how I
+want to initialize the struckt and create it. any other method, the first arguement has to be (&self). 
+requrire pointer to initialize. so when calling method, it reauries opointer. from self, we can access the variables and methods. 
+- depending on the reference, might have to dereference * deastres??? wtf is deastress? we can call self.method the rust is smart enough
+this is reference. might not be clear for compilor sometimes too. * astress is dereerence. 
+
+====box=== 
+- container to generic type. not sure the type, we can use box. 
+
+==clone, copy in rust=====
+- rust doesnt konw how to clone
+clone: call clone on object, 
+copy: we can assign it when assignment to other variable. so its same thing???? need clarification
+
+=== option  result ===
+
+== vectors==
+we can increase, but when hit the capacity, it doubled. 
+hashmaps: hashing a key. vector of buckets. hashing function give us property to fast insertion to find keys. 
+hashset: no value. good for memebership. attendance structure. hashset can search who attended. 
+vector and hashmap: str & str, want to find all of the keys element between the letters m and s what would be a better data structure?
+    - with vectors, could build sort and rearrange them. easier to find where the first string where the m is. single step access to check where the letter s.
+    - hash map no faster way. have to hash the key and its not stored in memory. 
+
+===test=====
+
+===directed graph, undirected graphs, ======
+list of edges, 
+adjacency list
+adjacency matrix: grown column enumerate. true = 1 in a row, that node is connected to that node. 
+
+
