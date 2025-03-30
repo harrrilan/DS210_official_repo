@@ -9,7 +9,6 @@ fn main() {
 }
 
 fn initialize_grid() -> Vec<Vec<bool>> {
-
     let mut grid = Vec::new();
     
     // Add 24 rows
@@ -18,10 +17,11 @@ fn initialize_grid() -> Vec<Vec<bool>> {
         grid.push(row);
     }
     
-    // initial live cells
-    let live_cells = [(0, 1), (1, 2), (2, 0), (2, 1), (2, 2)];
-    for &(x, y) in &live_cells {
-        grid[x][y] = true;
+    // initial live cells - set up a glider pattern
+    // Note: Coordinates are [y][x] since we print rows first
+    let live_cells = [(1, 0), (2, 1), (0, 2), (1, 2), (2, 2)];
+    for &(y, x) in &live_cells {
+        grid[y][x] = true;
     }
     
     grid
@@ -34,38 +34,38 @@ fn next_generation(current_grid: &[Vec<bool>]) -> Vec<Vec<bool>> {
     // Initialize each row
     for _ in 0..24 {
         let row = vec![false; 24];
-        grid.push(row);
+        new_grid.push(row);
     }
     
     // Calculate next state 
-    for x in 0..24 {
-        for y in 0..24 {
-            let current_state = current_grid[x][y];
-            let neighbor_count = count_neighbors(current_grid, x, y);
-            new_grid[x][y] = compute_new_state(current_state, neighbor_count);
+    for y in 0..24 {
+        for x in 0..24 {
+            let current_state = current_grid[y][x];
+            let neighbor_count = count_neighbors(current_grid, y, x);
+            new_grid[y][x] = compute_new_state(current_state, neighbor_count);
         }
     }
     
     new_grid
 }
 
-fn count_neighbors(grid: &[Vec<bool>], x: usize, y: usize) -> u8 {
+fn count_neighbors(grid: &[Vec<bool>], y: usize, x: usize) -> u8 {
     let mut count = 0;
     
     // Check all neighbors
-    for dx in -1..=1 {
-        for dy in -1..=1 {
+    for dy in -1..=1 {
+        for dx in -1..=1 {
             // Skip the cell itself
             if dx == 0 && dy == 0 {
                 continue;
             }
             
             // Handle grid wrapping with modulo
-            let nx = (x as i32 + dx + 24) % 24;
             let ny = (y as i32 + dy + 24) % 24;
+            let nx = (x as i32 + dx + 24) % 24;
             
             // Count if neighbor is alive
-            if grid[nx as usize][ny as usize] {
+            if grid[ny as usize][nx as usize] {
                 count += 1;
             }
         }
@@ -75,13 +75,10 @@ fn count_neighbors(grid: &[Vec<bool>], x: usize, y: usize) -> u8 {
 }
 
 fn compute_new_state(current_state: bool, neighbor_count: u8) -> bool {
-    // Conway's rules
-    if neighbor_count == 2 {
-        current_state  // Stay
-    } else if neighbor_count == 3 {
-        true         
-    } else {
-        false      
+    match (current_state, neighbor_count) {
+        (true, 2) | (true, 3) => true,   
+        (false, 3) => true,             
+        _ => false                
     }
 }
 
@@ -101,16 +98,18 @@ mod tests {
 
     #[test]
     fn test_compute_new_state() {
+        // Live cell tests
+        assert_eq!(compute_new_state(true, 0), false);  // Dies from underpopulation
+        assert_eq!(compute_new_state(true, 1), false);  // Dies from underpopulation
+        assert_eq!(compute_new_state(true, 2), true);   // Survives
+        assert_eq!(compute_new_state(true, 3), true);   // Survives
+        assert_eq!(compute_new_state(true, 4), false);  // Dies from overpopulation
+        assert_eq!(compute_new_state(true, 5), false);  // Dies from overpopulation
         
-        assert_eq!(compute_new_state(true, 2), true);
-        assert_eq!(compute_new_state(true, 3), true);
-        
-        assert_eq!(compute_new_state(true, 1), false);
-        assert_eq!(compute_new_state(true, 4), false);
-        
-        assert_eq!(compute_new_state(false, 3), true);
-        
-        assert_eq!(compute_new_state(false, 2), false);
+        // Dead cell tests
+        assert_eq!(compute_new_state(false, 2), false); // Stays dead
+        assert_eq!(compute_new_state(false, 3), true);  // Becomes alive
+        assert_eq!(compute_new_state(false, 4), false); // Stays dead
     }
 
     #[test]
