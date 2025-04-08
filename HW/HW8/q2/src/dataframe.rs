@@ -1,3 +1,5 @@
+// src/dataframe.rs
+
 use std::fs;
 use std::fmt;
 use std::error::Error;
@@ -44,7 +46,6 @@ impl ColumnData {
         }
     }
 }
-
 
 /// DataFrame struct, representing data organized by columns and rows.
 #[derive(Debug, Clone)]
@@ -144,7 +145,6 @@ impl DataFrame {
                 ));
             }
             names.push(fields[0].to_string());
-            // Parse numbers with proper error handling.
             numbers.push(fields[1]
                 .parse::<i64>()
                 .map_err(|e| DataFrameError::CSVParseError(format!("Error parsing Number on line {}: {}", lineno + 2, e)))?);
@@ -178,12 +178,10 @@ impl DataFrame {
     /// This checks that the new column has the same number of rows as the existing DataFrame.
     /// Returns a new DataFrame with the extra column.
     pub fn add_column(&self, label: String, data: ColumnData) -> Result<DataFrame, DataFrameError> {
-        // Get current row count.
         let current_rows = if self.columns.is_empty() { 0 } else { self.columns[0].len() };
         if data.len() != current_rows {
             return Err(DataFrameError::InconsistentRowCount(current_rows, data.len()));
         }
-        // Create new vectors with the additional column.
         let mut new_labels = self.labels.clone();
         new_labels.push(label);
         let mut new_columns = self.columns.clone();
@@ -193,9 +191,8 @@ impl DataFrame {
 
     /// Merges two DataFrames by appending the rows.
     ///
-    /// This checks that the number of columns, their labels, and their types all match.
+    /// This checks that the labels and column types match.
     pub fn merge_frame(&self, other: &DataFrame) -> Result<DataFrame, DataFrameError> {
-        // Check that the labels match exactly.
         if self.labels != other.labels {
             return Err(DataFrameError::LabelColumnMismatch);
         }
@@ -205,7 +202,6 @@ impl DataFrame {
 
         let mut merged_columns = Vec::with_capacity(self.columns.len());
         for (col1, col2) in self.columns.iter().zip(&other.columns) {
-            // Check that the variants match.
             let merged = match (col1, col2) {
                 (ColumnData::StringVec(v1), ColumnData::StringVec(v2)) => {
                     let mut v = v1.clone();
@@ -227,7 +223,6 @@ impl DataFrame {
                     v.extend(v2.clone());
                     ColumnData::BoolVec(v)
                 },
-                // Incompatible types.
                 _ => return Err(DataFrameError::TypeMismatch("Column types do not match".to_string())),
             };
             merged_columns.push(merged);
@@ -254,83 +249,32 @@ impl DataFrame {
 
     /// Filters the DataFrame by applying a closure on an f64 column.
     ///
-    /// Returns a new DataFrame containing only the rows for which `predicate` returns true.
-    /// (In this implementation we demonstrate filtering on f64 columns, for example finding players
-    /// with PPG greater than 25.0.)
+    /// Returns a new DataFrame containing only the rows for which the predicate returns true.
     pub fn filter_f64<F>(&self, column_label: &str, predicate: F) -> Result<DataFrame, DataFrameError>
     where
         F: Fn(&f64) -> bool,
     {
-        // Find the position of the requested column.
         let pos = self.labels.iter().position(|l| l == column_label)
             .ok_or_else(|| DataFrameError::ColumnNotFound(column_label.to_string()))?;
-        
-        // Expect the column to be f64 type.
         let indices: Vec<usize> = match &self.columns[pos] {
             ColumnData::F64Vec(vec) => {
-                vec.iter()
-                   .enumerate()
+                vec.iter().enumerate()
                    .filter_map(|(i, val)| if predicate(val) { Some(i) } else { None })
                    .collect()
             },
             _ => return Err(DataFrameError::TypeMismatch(format!("Column {} is not of type f64", column_label))),
         };
-
-        // Use the collected indices to filter every column.
         let new_columns: Vec<ColumnData> = self.columns.iter()
             .map(|col| col.filter_by_indices(&indices))
             .collect();
-        // The labels remain the same.
         DataFrame::new(self.labels.clone(), new_columns)
     }
 
-    /// Applies an arbitrary operation on the entire set of columns.
-    ///
-    /// The closure `op` receives a reference to the slice of columns and returns an arbitrary result `R`.
+    /// Generic column operation, applies an arbitrary operation on the entire set of columns.
     pub fn column_op<F, R>(&self, op: F) -> R 
     where 
         F: Fn(&[ColumnData]) -> R,
     {
         op(&self.columns)
     }
-}
-
-fn main() -> Result<(), Box<dyn Error>> {
-    // Read a DataFrame from CSV.
-    let df = DataFrame::read_csv("data.csv")?;
-    println!("Original DataFrame: {:?}", df);
-
-    // Add a new column "hall_of_fame" (for demonstration, mark players with PPG > 25.0)
-    let hall_of_fame: Vec<bool> = if let ColumnData::F64Vec(ppg) = &df.columns[2] {
-        ppg.iter().map(|&val| val > 25.0).collect()
-    } else {
-        vec![]
-    };
-    let df_with_hof = df.add_column("hall_of_fame".to_string(), ColumnData::BoolVec(hall_of_fame))?;
-    println!("After adding hall_of_fame: {:?}", df_with_hof);
-
-    // Merge with another DataFrame.
-    let csv_data = "\
-Name,Number,PPG,YearBorn,TotalPoints,LikesPizza
-Magic,32,19.6,1959,17707,true
-Larry,33,24.3,1956,21791,true";
-    fs::write("data2.csv", csv_data)?;
-    let df2 = DataFrame::read_csv("data2.csv")?;
-    // Merge the two DataFrames (requires that the labels and column types match).
-    let merged = df.merge_frame(&df2)?;
-    println!("Merged DataFrame: {:?}", merged);
-
-    // Restrict to only the columns "Name" and "TotalPoints".
-    let restricted = merged.restrict_columns(&vec!["Name".to_string(), "TotalPoints".to_string()])?;
-    println!("Restricted DataFrame: {:?}", restricted);
-
-    // Filter rows: find all rows with PPG > 25.0.
-    let filtered = df.filter_f64("PPG", |val| *val > 25.0)?;
-    println!("Filtered DataFrame: {:?}", filtered);
-
-    // Column operation: simply count the number of rows in the first column.
-    let row_count = df.column_op(|cols| cols[0].len());
-    println!("Row count (via column_op): {}", row_count);
-
-    Ok(())
 }
