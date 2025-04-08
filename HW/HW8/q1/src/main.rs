@@ -257,7 +257,7 @@ impl DataFrame {
     /// Returns a new DataFrame containing only the rows for which `predicate` returns true.
     /// (In this implementation we demonstrate filtering on f64 columns, for example finding players
     /// with PPG greater than 25.0.)
-    pub fn filter_f64<F>(&self, column_label: &str, predicate: F) -> Result<DataFrame, DataFrameError>
+    pub fn filter<F>(&self, column_label: &str, predicate: F) -> Result<DataFrame, DataFrameError>
     where
         F: Fn(&f64) -> bool,
     {
@@ -325,7 +325,7 @@ Larry,33,24.3,1956,21791,true";
     println!("Restricted DataFrame: {:?}", restricted);
 
     // Filter rows: find all rows with PPG > 25.0.
-    let filtered = df.filter_f64("PPG", |val| *val > 25.0)?;
+    let filtered = df.filter("PPG", |val| *val > 25.0)?;
     println!("Filtered DataFrame: {:?}", filtered);
 
     // Column operation: simply count the number of rows in the first column.
