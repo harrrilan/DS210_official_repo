@@ -3,9 +3,7 @@
 use crate::dataframe::{DataFrame, ColumnData, DataFrameError};
 
 impl DataFrame {
-    /// Computes and returns the median for the "PPG" numerical column.
-    ///
-    /// It uses the `column_op()` method.
+    
     pub fn median_ppg(&self) -> Result<f64, DataFrameError> {
         self.column_op(|cols| {
             let pos = self.labels.iter()
@@ -31,10 +29,6 @@ impl DataFrame {
         })
     }
 
-    /// Performs row-wise subtraction of the "TotalPoints" and "YearBorn" columns.
-    ///
-    /// Returns a vector of the result for each row (TotalPoints - YearBorn).
-    /// It uses the `column_op()` method.
     pub fn sub_columns(&self) -> Result<Vec<i64>, DataFrameError> {
         self.column_op(|cols| {
             let tp_index = self.labels.iter()

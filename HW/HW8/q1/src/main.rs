@@ -97,20 +97,6 @@ impl DataFrame {
         Ok(DataFrame { labels, columns })
     }
 
-    /// Reads a CSV file and builds a DataFrame.
-    ///
-    /// This expects a CSV file with the following content:
-    ///
-    /// ```csv
-    /// Name,Number,PPG,YearBorn,TotalPoints,LikesPizza
-    /// Kareem,33,24.6,1947,48387,true
-    /// Karl,32,25.1,1963,46928,false
-    /// LeBron,23,27.0,1984,46381,false
-    /// Kobe,24,25.0,1978,43643,true
-    /// Michael,23,30.1,1963,42292,false
-    /// ```
-    ///
-    /// With expected types: String, i64, f64, i64, i64, bool.
     pub fn read_csv(file_path: &str) -> Result<DataFrame, DataFrameError> {
         let content = fs::read_to_string(file_path)
             .map_err(|e| DataFrameError::FileError(e.to_string()))?;
@@ -144,7 +130,6 @@ impl DataFrame {
                 ));
             }
             names.push(fields[0].to_string());
-            // Parse numbers with proper error handling.
             numbers.push(fields[1]
                 .parse::<i64>()
                 .map_err(|e| DataFrameError::CSVParseError(format!("Error parsing Number on line {}: {}", lineno + 2, e)))?);
@@ -173,17 +158,11 @@ impl DataFrame {
         DataFrame::new(labels, columns)
     }
 
-    /// Adds a new column to the DataFrame.
-    ///
-    /// This checks that the new column has the same number of rows as the existing DataFrame.
-    /// Returns a new DataFrame with the extra column.
     pub fn add_column(&self, label: String, data: ColumnData) -> Result<DataFrame, DataFrameError> {
-        // Get current row count.
         let current_rows = if self.columns.is_empty() { 0 } else { self.columns[0].len() };
         if data.len() != current_rows {
             return Err(DataFrameError::InconsistentRowCount(current_rows, data.len()));
         }
-        // Create new vectors with the additional column.
         let mut new_labels = self.labels.clone();
         new_labels.push(label);
         let mut new_columns = self.columns.clone();
@@ -191,9 +170,6 @@ impl DataFrame {
         DataFrame::new(new_labels, new_columns)
     }
 
-    /// Merges two DataFrames by appending the rows.
-    ///
-    /// This checks that the number of columns, their labels, and their types all match.
     pub fn merge_frame(&self, other: &DataFrame) -> Result<DataFrame, DataFrameError> {
         // Check that the labels match exactly.
         if self.labels != other.labels {
@@ -235,9 +211,6 @@ impl DataFrame {
         DataFrame::new(self.labels.clone(), merged_columns)
     }
 
-    /// Returns a new DataFrame with only the columns having labels in `desired`.
-    ///
-    /// Returns an error if any of the desired labels do not exist.
     pub fn restrict_columns(&self, desired: &[String]) -> Result<DataFrame, DataFrameError> {
         let mut new_labels = Vec::with_capacity(desired.len());
         let mut new_columns = Vec::with_capacity(desired.len());
@@ -252,11 +225,6 @@ impl DataFrame {
         DataFrame::new(new_labels, new_columns)
     }
 
-    /// Filters the DataFrame by applying a closure on an f64 column.
-    ///
-    /// Returns a new DataFrame containing only the rows for which `predicate` returns true.
-    /// (In this implementation we demonstrate filtering on f64 columns, for example finding players
-    /// with PPG greater than 25.0.)
     pub fn filter<F>(&self, column_label: &str, predicate: F) -> Result<DataFrame, DataFrameError>
     where
         F: Fn(&f64) -> bool,
@@ -284,9 +252,6 @@ impl DataFrame {
         DataFrame::new(self.labels.clone(), new_columns)
     }
 
-    /// Applies an arbitrary operation on the entire set of columns.
-    ///
-    /// The closure `op` receives a reference to the slice of columns and returns an arbitrary result `R`.
     pub fn column_op<F, R>(&self, op: F) -> R 
     where 
         F: Fn(&[ColumnData]) -> R,
