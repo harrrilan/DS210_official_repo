@@ -5,3 +5,4 @@ edition = "2024"
 
 [dependencies]
 ndarray = "0.16.1"
+smartcore = { version = "0.3.2", features = ["datasets"] }
