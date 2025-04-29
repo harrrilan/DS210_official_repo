@@ -1,8 +1,8 @@
 [package]
 name = "titanic"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
-ndarray = "0.16.1"
-smartcore = { version = "0.3.2", features = ["datasets"] }
+ndarray = "0.15"
+rand = "0.8"
