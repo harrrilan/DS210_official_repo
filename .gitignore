@@ -1,6 +1,5 @@
 # Rust build artifacts
 /target/
-/debug/
 
 # Cargo lock file (remove this line if this is a binary/application)
 Cargo.lock

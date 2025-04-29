@@ -1,9 +1,9 @@
 [package]
-name = "q1"
+name = "q2"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-csv = "1.1"
 ndarray = "0.15"
-serde = { version = "1.0.136", features = ["derive"] }
+rand    = "0.8"
+csv     = "1.1"
