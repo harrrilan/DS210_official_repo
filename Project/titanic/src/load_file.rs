@@ -3,6 +3,8 @@ use std::error::Error;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+
+// Assume the data is in neumerical format
 pub fn load_csv(
     path: &str,
     delimiter: char,
@@ -55,5 +57,59 @@ pub fn print_head(array: &Array2<f32>, n: usize) {
     for i in 0..n {
         let row = rows.clone().into_iter().nth(i).unwrap();
         println!("{:?}", row);
+    }
+}
+
+// Tests
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use ndarray::arr2;
+    use tempfile::NamedTempFile;
+    use std::io::Write;
+
+    /// Helper that dumps `contents` into a fresh temporary file
+    /// and returns the (still-open) file handle.
+    fn write_temp(contents: &str) -> NamedTempFile {
+        let mut file = NamedTempFile::new().expect("cannot create temp file");
+        write!(file, "{}", contents).expect("cannot write temp file");
+        file
+    }
+
+    #[test]
+    fn load_csv_with_headers() {
+        let csv = "c1,c2\n1.0,2.0\n3.0,4.0\n";
+        let file = write_temp(csv);
+
+        let got = load_csv(file.path().to_str().unwrap(), ',', true).unwrap();
+        let want = arr2(&[[1.0, 2.0], [3.0, 4.0]]);
+
+        assert_eq!(got, want);
+    }
+
+    #[test]
+    fn load_csv_without_headers_semicolon_delim() {
+        let csv = "1.0;2.0\n3.0;4.0\n";
+        let file = write_temp(csv);
+
+        let got = load_csv(file.path().to_str().unwrap(), ';', false).unwrap();
+        let want = arr2(&[[1.0, 2.0], [3.0, 4.0]]);
+
+        assert_eq!(got, want);
+    }
+
+    #[test]
+    fn load_csv_inconsistent_columns_should_error() {
+        let csv = "1,2,3\n4,5\n"; // second row has fewer columns
+        let file = write_temp(csv);
+
+        assert!(load_csv(file.path().to_str().unwrap(), ',', false).is_err());
+    }
+
+    #[test]
+    fn print_head_does_not_panic() {
+        // We don’t assert on stdout here—just make sure the function runs.
+        let arr = arr2(&[[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]]);
+        print_head(&arr, 2);
     }
 }

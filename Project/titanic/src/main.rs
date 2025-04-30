@@ -7,6 +7,8 @@ use std::env;
 
 fn main() -> Result<(), Box<dyn Error>> {
     println!("Current dir: {:?}", env::current_dir()?);
+    
+    // specify the path to your CSV file
     let data = load_csv("data/processed_titanic.csv", ',', true)?;
     println!("Shape: {:?}", data.dim());
 

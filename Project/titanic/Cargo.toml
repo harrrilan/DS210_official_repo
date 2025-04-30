@@ -6,3 +6,5 @@ edition = "2021"
 [dependencies]
 ndarray = "0.15"
 rand = "0.8"
+tempfile = "3"
+ordered-float = "3"
