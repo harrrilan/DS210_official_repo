@@ -8,3 +8,9 @@ ndarray = "0.15"
 rand = "0.8"
 tempfile = "3"
 ordered-float = "3"
+
+linfa-logistic = "0.6.1"     
+linfa = "0.6.1"
+
+
+ndarray-stats = "0.5" 
