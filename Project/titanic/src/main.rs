@@ -1,7 +1,8 @@
 mod load_file;
 mod split;
 mod regression;
-mod scaling;  
+mod scaling;
+pub mod evaluation;
 
 use load_file::{load_csv, print_head};
 use split::train_test_split;

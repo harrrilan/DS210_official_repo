@@ -1,9 +1,6 @@
 use ndarray::{Array2};
 
-pub fn standard_scale(
-    train: &mut Array2<f32>,
-    test: &mut Array2<f32>,
-) -> Vec<(f32, f32)> {
+pub fn standard_scale(train: &mut Array2<f32>, test: &mut Array2<f32>,) -> Vec<(f32, f32)> {
     let n_cols = train.ncols();
     assert_eq!(
         n_cols,
@@ -40,14 +37,14 @@ pub fn standard_scale(
 
 
 mod tests {
-    use super::*;
     use ndarray::{array, s, Array2};
-    
-    // helper: assert two floats are ~equal
-    fn close(a: f32, b: f32, eps: f32) {
-        assert!((a - b).abs() < eps, "expected {a} ≈ {b}");
-    }
+    use super::standard_scale;
 
+
+    fn close(a: f32, b: f32, tol: f32) -> bool {
+        (a - b).abs() < tol
+    }
+    
     #[test]
     fn standard_scale_basic() {
         // 3 rows, 1 label column (col 0) + 2 feature columns (1,2)
